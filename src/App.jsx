@@ -5,9 +5,7 @@ import { Body } from './components/Body'
 function App() {
   return (
     <>
-      <Container>
-        <Header />
-      </Container>
+      <Header />
       <Container>
         <Body />
       </Container>

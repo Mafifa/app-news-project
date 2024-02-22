@@ -1,6 +1,6 @@
-export function Container ({ children }) {
+export function Container({ children }) {
   return (
-    <section className='max-w-screen-lg mx-auto'>
+    <section className='flex items-center lg:max-w-screen-lg mx-auto'>
       {children}
     </section>
   )
