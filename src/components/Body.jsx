@@ -6,10 +6,10 @@ export function Body() {
 
   function newsRender() {
     return (
-      <ul>
+      <ul className='news'>
         {
           News.map((noticias) => (
-            <li className='p-2 m-2 bg-[#8d99ae] rounded-xl' key={noticias.ID}>
+            <li className='new p-2 m-2 bg-[#8d99ae] rounded-xl' key={noticias.ID}>
               <div>
                 <a href={noticias.url}>
                   <div>
