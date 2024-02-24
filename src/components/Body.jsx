@@ -1,17 +1,17 @@
 import { useNews } from '../Hooks/Hook'
 import '../assets/grid.css'
 
-export function Body() {
+export function Body () {
   const { News } = useNews() // Custom hook get response from API
 
-  function newsRender() {
+  function newsRender () {
     return (
       <ul className='news'>
         {
           News.map((noticias) => (
             <li className='new p-2 m-2 bg-[#8d99ae] rounded-xl' key={noticias.ID}>
               <div>
-                <a href={noticias.url}>
+                <a target='_blank' rel='nooperner noreferrer' href={noticias.url}>
                   <div>
                     <h3 className='text-3xl font-bold text-wrap'>{noticias.title}</h3>
                     <p className='text-black font-bold italic'>{noticias.date}</p>
