@@ -1,8 +1,10 @@
+import { useState } from 'react'
 import response from '../api/response.json'
 
-const news = response.articles
+export function useNews ({ search }) {
+  const [responseNews, setResponseNews] = useState([])
+  const news = responseNews.articles
 
-export function useNews () {
   const newsMapped = news?.map((news, index) => ({
     ID: index,
     autor: news.author,
@@ -10,5 +12,14 @@ export function useNews () {
     url: news.url,
     date: news.publishedAt
   }))
-  return { News: newsMapped }
+
+  const getNews = () => {
+    if (search) {
+      setResponseNews(response)
+    } else {
+      setResponseNews([])
+    }
+  }
+
+  return { News: newsMapped, getNews }
 }

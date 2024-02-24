@@ -1,10 +1,10 @@
 import { useNews } from '../Hooks/Hook'
 import '../assets/grid.css'
 
-export function Body () {
+export function Body() {
   const { News } = useNews() // Custom hook get response from API
 
-  function newsRender () {
+  function newsRender() {
     return (
       <ul className='news'>
         {
@@ -33,7 +33,6 @@ export function Body () {
           <button type='button' className='text-lg p-1 mx-2 lg:p-2 bg-[#393d3f] text-white font-bold rounded-lg'>Ciencia</button>
           <button type='button' className='text-lg p-1 mx-2 lg:p-2 bg-[#393d3f] text-white font-bold rounded-lg'>Salud</button>
           <button type='button' className='text-lg p-1 mx-2 lg:p-2 bg-[#393d3f] text-white font-bold rounded-lg'>Entretenimiento</button>
-
         </div>
         <form method='get' className='mx-2 flex'>
           <input size='16' className='rounded-xl ' type='search' placeholder='Elon Musk, Maduro...' name='buscar' id='buscar' />
