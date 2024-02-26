@@ -1,8 +1,17 @@
+import { useRef } from 'react'
 import { useNews } from '../Hooks/Hook'
 import '../assets/grid.css'
 
 export function Body() {
-  const { News } = useNews() // Custom hook get response from API
+  const { News, getNews } = useNews({ search }) // Custom hook get response from API
+  const inputRef = useRef()
+
+  const handleSubmit = (event) => {
+    event.preventDefault()
+    const search = inputRef.current.value
+    console.log(search)
+    getNews()
+  }
 
   function newsRender() {
     return (
@@ -34,8 +43,8 @@ export function Body() {
           <button type='button' className='text-lg p-1 mx-2 lg:p-2 bg-[#393d3f] text-white font-bold rounded-lg'>Salud</button>
           <button type='button' className='text-lg p-1 mx-2 lg:p-2 bg-[#393d3f] text-white font-bold rounded-lg'>Entretenimiento</button>
         </div>
-        <form method='get' className='mx-2 flex'>
-          <input size='16' className='rounded-xl ' type='search' placeholder='Elon Musk, Maduro...' name='buscar' id='buscar' />
+        <form method='get' onSubmit={handleSubmit} className='mx-2 flex'>
+          <input ref={inputRef} size='16' className='rounded-xl ' type='search' placeholder='Elon Musk, Maduro...' name='buscar' id='buscar' />
           <button type='submit' className='p-2 m-2 flex rounded-xl bg-[#2B2D42] text-white font-bold items-center text-sm lg:text-2xl text-nowrap'>Buscar🔍</button>
         </form>
       </div>
