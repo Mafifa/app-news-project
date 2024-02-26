@@ -1,14 +1,16 @@
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import { useNews } from '../Hooks/Hook'
 import '../assets/grid.css'
 
 export function Body() {
-  const { News, getNews } = useNews({ search }) // Custom hook get response from API
+  const [search, updateSearch] = useState('')
+  const { newsMapped, getNews } = useNews({ search }) // Custom hook get response from API
   const inputRef = useRef()
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    const search = inputRef.current.value
+    const busqueda = inputRef.current.value
+    updateSearch(busqueda)
     console.log(search)
     getNews()
   }
@@ -17,7 +19,7 @@ export function Body() {
     return (
       <ul className='news'>
         {
-          News.map((noticias) => (
+          newsMapped.map(noticias => (
             <li className='new p-2 m-2 bg-[#8d99ae] rounded-xl' key={noticias.ID}>
               <div>
                 <a target='_blank' rel='nooperner noreferrer' href={noticias.url}>
