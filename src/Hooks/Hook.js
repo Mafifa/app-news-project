@@ -12,7 +12,7 @@ export function useNews({ topic, country }) {
     autor: news.author,
     title: news.title,
     url: news.url,
-    date: news.publishedAt
+    date: news.publishedAt.slice(0, -10)
   }))
 
   const getNews = () => {
