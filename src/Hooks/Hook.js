@@ -22,10 +22,10 @@ export function useNews({ topic, country }) {
       fetch(`https://newsapi.org/v2/top-headlines?country=${country}&category=${topic}&apiKey=${key}`)
         .then(res => res.json())
         .then(json => {
-          console.log(`Topic is: ${topic}`)
-          console.log(`Country is: ${country}`)
           setResponseNews(json)
         })
+      console.log(`C FF is: ${country}`) // C FF = From Fetch Country
+      console.log(`T FF T is: ${topic}`) // T FF = From Fetch Topic
     } else {
       setResponseNews(['Error en el resultado'])
     }

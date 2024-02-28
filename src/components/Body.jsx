@@ -1,13 +1,20 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useNews } from '../Hooks/Hook'
 import '../assets/grid.css'
 
 export function Body() {
-  const [topic, updateTopic] = useState('') // Custom hook to give the topic
-  const [country, updateCountry] = useState('') // Custom hook to give the topic
+  const [topic, updateTopic] = useState('business') // Custom hook to give the topic
+  const [country, updateCountry] = useState('ve') // Custom hook to give the topic
   const { newsMapped, getNews } = useNews({ topic, country }) // Custom hook to get response from API (the Topic)
 
   const hasNews = newsMapped?.length > 0
+
+  // To start the website, GET THE FIRST NEWS
+  useEffect(() => {
+    getNews()
+    console.log(`First run : ${topic}`)
+    console.log(`First run : ${country}`)
+  }, [topic, country])
 
   const clickToTopic = (TOPIC) => {
     updateTopic(TOPIC)
@@ -20,6 +27,7 @@ export function Body() {
     getNews()
     console.log('Click Render Country')
   }
+
   function newsRender() {
     return (
       <ul className='news'>
@@ -66,7 +74,7 @@ export function Body() {
       </div>
 
       <div className='p-2 bg-[#2B2D42] rounded-xl flex-col items-center justify-around'>
-        <h1 className='font-bold m-4 text-white lg:text-2xl'>Noticias de ultimo momento: </h1>
+        <h1 className='font-bold m-4 text-white lg:text-2xl'>{`Noticias de ultimo momento en ${country === 've' ? 'Venezuela' : 'EE.UU'} - ${topic}`}</h1>
         {hasNews ? newsRender() : noResult}
       </div>
     </div>
