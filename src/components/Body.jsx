@@ -18,13 +18,11 @@ export function Body() {
 
   const clickToTopic = (TOPIC) => {
     updateTopic(TOPIC)
-    getNews()
     console.log('Click Render Topic')
   }
 
   const clickToCountry = (COUNTRY) => {
     updateCountry(COUNTRY)
-    getNews()
     console.log('Click Render Country')
   }
 
