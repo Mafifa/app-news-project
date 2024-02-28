@@ -30,13 +30,13 @@ export function Body() {
     return (
       <ul className='news'>
         {
-          newsMapped.map(noticias => (
-            <li className='new p-2 m-2 bg-[#8d99ae] rounded-xl' key={noticias.ID}>
+          newsMapped.map(news => (
+            <li className='new p-2 m-2 bg-[#8d99ae] rounded-xl' key={news.ID}>
               <div>
-                <a target='_blank' rel='nooperner noreferrer' href={noticias.url}>
+                <a target='_blank' rel='nooperner noreferrer' href={news.url}>
                   <div>
-                    <h3 className='text-3xl font-bold text-wrap'>{noticias.title}</h3>
-                    <p className='text-black font-bold italic'>{noticias.date}</p>
+                    <h3 className='text-3xl font-bold text-wrap'>{news.title}</h3>
+                    <p className='text-black font-bold italic'>{news.date}</p>
                   </div>
                 </a>
               </div>
@@ -72,7 +72,7 @@ export function Body() {
       </div>
 
       <div className='p-2 bg-[#2B2D42] rounded-xl flex-col items-center justify-around'>
-        <h1 className='font-bold m-4 text-white lg:text-2xl'>{`Noticias de ultimo momento en ${country === 've' ? 'Venezuela' : 'EE.UU'} - ${topic}`}</h1>
+        <h1 className='font-bold m-4 text-white lg:text-2xl'>{`Breaking news in ${country === 've' ? 'Venezuela' : 'EE.UU'} - ${topic}`}</h1>
         {hasNews ? newsRender() : noResult}
       </div>
     </div>
