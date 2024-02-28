@@ -1,20 +1,25 @@
-import { useRef, useState } from 'react'
+import { useState } from 'react'
 import { useNews } from '../Hooks/Hook'
 import '../assets/grid.css'
 
 export function Body() {
-  const [search, updateSearch] = useState('')
-  const { newsMapped, getNews } = useNews({ search }) // Custom hook get response from API
-  const inputRef = useRef()
+  const [topic, updateTopic] = useState('') // Custom hook to give the topic
+  const [country, updateCountry] = useState('') // Custom hook to give the topic
+  const { newsMapped, getNews } = useNews({ topic, country }) // Custom hook to get response from API (the Topic)
 
-  const handleSubmit = (event) => {
-    event.preventDefault()
-    const busqueda = inputRef.current.value
-    updateSearch(busqueda)
-    console.log(search)
+  const hasNews = newsMapped?.length > 0
+
+  const clickToTopic = (TOPIC) => {
+    updateTopic(TOPIC)
     getNews()
+    console.log('Click Render Topic')
   }
 
+  const clickToCountry = (COUNTRY) => {
+    updateCountry(COUNTRY)
+    getNews()
+    console.log('Click Render Country')
+  }
   function newsRender() {
     return (
       <ul className='news'>
@@ -35,25 +40,34 @@ export function Body() {
       </ul>
     )
   }
+
+  function noResult() {
+    return (
+      <div>
+        <h2>No se encontraron resultados</h2>
+      </div>
+    )
+  }
+
   return (
     <div className='flex-col'>
       <div className='p-2 m-2 bg-[#8d99ae] rounded-2xl text-2xl flex items-center justify-between'>
         <div className='flex items-center'>
-          <button type='button' className='text-lg p-1 mx-2 lg:p-2 bg-[#393d3f] text-white font-bold rounded-lg'>Negocios</button>
-          <button type='button' className='text-lg p-1 mx-2 lg:p-2 bg-[#393d3f] text-white font-bold rounded-lg'>Deporte</button>
-          <button type='button' className='text-lg p-1 mx-2 lg:p-2 bg-[#393d3f] text-white font-bold rounded-lg'>Ciencia</button>
-          <button type='button' className='text-lg p-1 mx-2 lg:p-2 bg-[#393d3f] text-white font-bold rounded-lg'>Salud</button>
-          <button type='button' className='text-lg p-1 mx-2 lg:p-2 bg-[#393d3f] text-white font-bold rounded-lg'>Entretenimiento</button>
+          <button onClick={() => clickToTopic('business')} type='button' className='text-lg p-1 mx-2 lg:p-2 bg-[#393d3f] text-white font-bold rounded-lg'>Negocios</button>
+          <button onClick={() => clickToTopic('sports')} type='button' className='text-lg p-1 mx-2 lg:p-2 bg-[#393d3f] text-white font-bold rounded-lg'>Deporte</button>
+          <button onClick={() => clickToTopic('science')} type='button' className='text-lg p-1 mx-2 lg:p-2 bg-[#393d3f] text-white font-bold rounded-lg'>Ciencia</button>
+          <button onClick={() => clickToTopic('health')} type='button' className='text-lg p-1 mx-2 lg:p-2 bg-[#393d3f] text-white font-bold rounded-lg'>Salud</button>
+          <button onClick={() => clickToTopic('entertainment')} type='button' className='text-lg p-1 mx-2 lg:p-2 bg-[#393d3f] text-white font-bold rounded-lg'>Entretenimiento</button>
         </div>
-        <form method='get' onSubmit={handleSubmit} className='mx-2 flex'>
-          <input ref={inputRef} size='16' className='rounded-xl ' type='search' placeholder='Elon Musk, Maduro...' name='buscar' id='buscar' />
-          <button type='submit' className='p-2 m-2 flex rounded-xl bg-[#2B2D42] text-white font-bold items-center text-sm lg:text-2xl text-nowrap'>Buscar🔍</button>
-        </form>
+        <div>
+          <button onClick={() => clickToCountry('ve')} type='button' className='text-lg p-1 mx-2 lg:p-2 bg-[#393d3f] text-white font-bold rounded-lg'>Venezuela</button>
+          <button onClick={() => clickToCountry('us')} type='button' className='text-lg p-1 mx-2 lg:p-2 bg-[#393d3f] text-white font-bold rounded-lg'>EE.UU</button>
+        </div>
       </div>
 
       <div className='p-2 bg-[#2B2D42] rounded-xl flex-col items-center justify-around'>
         <h1 className='font-bold m-4 text-white lg:text-2xl'>Noticias de ultimo momento: </h1>
-        {newsRender()}
+        {hasNews ? newsRender() : noResult}
       </div>
     </div>
   )

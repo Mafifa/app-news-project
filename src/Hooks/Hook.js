@@ -1,9 +1,8 @@
 import { useState } from 'react'
-import response from '../api/response.json'
 
 const key = 'f719cf731ef144f49fafc6ccefa4e26e'
 
-export function useNews({ search }) {
+export function useNews({ topic, country }) {
   const [responseNews, setResponseNews] = useState([])
 
   const news = responseNews.articles
@@ -17,10 +16,14 @@ export function useNews({ search }) {
   }))
 
   const getNews = () => {
-    if (search) {
-      fetch(`https://newsapi.org/v2/top-headlines?country=ve&apiKey=${key}`)
+    // setResponseNews(response)
+
+    if (topic || country) {
+      fetch(`https://newsapi.org/v2/top-headlines?country=${country}&category=${topic}&apiKey=${key}`)
         .then(res => res.json())
         .then(json => {
+          console.log(`Topic is: ${topic}`)
+          console.log(`Country is: ${country}`)
           setResponseNews(json)
         })
     } else {
