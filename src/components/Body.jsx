@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useNews } from '../Hooks/Hook'
 import '../assets/grid.css'
+import '../assets/button.css'
 
 export function Body() {
   const [topic, updateTopic] = useState('business') // Custom hook to give the topic
@@ -26,7 +27,7 @@ export function Body() {
     console.log('Click Render Country')
   }
 
-  function newsRender() {
+  const newsRender = () => {
     return (
       <ul className='news'>
         {
@@ -47,7 +48,7 @@ export function Body() {
     )
   }
 
-  function noResult() {
+  const noResult = () => {
     return (
       <div>
         <h2>No se encontraron resultados</h2>
@@ -55,15 +56,23 @@ export function Body() {
     )
   }
 
+  const renderButton = (showText, topic) => {
+    return (
+      <button onClick={() => clickToTopic(topic)} type='button' className='bg-[#191b1b] mx-1 bn54'>
+        <span className='bn54span'>{showText}</span>
+      </button>
+    )
+  }
+
   return (
     <div className='flex-col'>
-      <div className='p-2 m-2 bg-[#8d99ae] rounded-2xl text-2xl flex items-center justify-between'>
+      <div className='p-2 m-2 -z-50 bg-[#8d99ae] rounded-2xl text-2xl flex items-center justify-between'>
         <div className='flex items-center'>
-          <button onClick={() => clickToTopic('business')} type='button' className='text-lg p-1 mx-2 lg:p-2 bg-[#393d3f] text-white font-bold rounded-lg'>Negocios</button>
-          <button onClick={() => clickToTopic('sports')} type='button' className='text-lg p-1 mx-2 lg:p-2 bg-[#393d3f] text-white font-bold rounded-lg'>Deporte</button>
-          <button onClick={() => clickToTopic('science')} type='button' className='text-lg p-1 mx-2 lg:p-2 bg-[#393d3f] text-white font-bold rounded-lg'>Ciencia</button>
-          <button onClick={() => clickToTopic('health')} type='button' className='text-lg p-1 mx-2 lg:p-2 bg-[#393d3f] text-white font-bold rounded-lg'>Salud</button>
-          <button onClick={() => clickToTopic('entertainment')} type='button' className='text-lg p-1 mx-2 lg:p-2 bg-[#393d3f] text-white font-bold rounded-lg'>Entretenimiento</button>
+          {renderButton('Negocios', 'business')}
+          {renderButton('Deporte', 'sports')}
+          {renderButton('Ciencia', 'science')}
+          {renderButton('Salud', 'health')}
+          {renderButton('Entretenimiento', 'entertainment')}
         </div>
         <div>
           <button onClick={() => clickToCountry('ve')} type='button' className='text-lg p-1 mx-2 lg:p-2 bg-[#393d3f] text-white font-bold rounded-lg'>Venezuela</button>
