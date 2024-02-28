@@ -1,5 +1,3 @@
-
-
 const country = 've'
 const category = 'business'
 

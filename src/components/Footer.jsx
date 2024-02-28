@@ -1,4 +1,4 @@
-export function Footer () {
+export function Footer() {
   return (
 
     <footer className='bg-white dark:bg-[#2B2D42] mt-4'>
@@ -67,6 +67,5 @@ export function Footer () {
         </div>
       </div>
     </footer>
-
   )
 }
