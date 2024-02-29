@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useNews } from '../Hooks/Hook'
 import '../assets/grid.css'
 import '../assets/button.css'
+import '../assets/dropdown.css'
 
 export function Body() {
   const [topic, updateTopic] = useState('business') // Custom hook to give the topic
@@ -64,8 +65,18 @@ export function Body() {
     )
   }
 
+  const fetchDePrueba = () => {
+    const URL = 'https://newsapi.org/v2/top-headlines?country=us&language=es&apiKey=f719cf731ef144f49fafc6ccefa4e26e'
+    fetch(URL)
+      .then(res => res.json())
+      .then(json => {
+        console.log(json)
+      })
+  }
+
   return (
     <div className='flex-col'>
+      <button onClick={fetchDePrueba}>Fetch de prueba</button>
       <div className='p-2 m-2 -z-50 bg-[#8d99ae] rounded-2xl text-2xl flex items-center justify-between'>
         <div className='flex items-center'>
           {renderButton('Negocios', 'business')}
@@ -74,9 +85,14 @@ export function Body() {
           {renderButton('Salud', 'health')}
           {renderButton('Entretenimiento', 'entertainment')}
         </div>
-        <div>
-          <button onClick={() => clickToCountry('ve')} type='button' className='text-lg p-1 mx-2 lg:p-2 bg-[#393d3f] text-white font-bold rounded-lg'>Venezuela</button>
-          <button onClick={() => clickToCountry('us')} type='button' className='text-lg p-1 mx-2 lg:p-2 bg-[#393d3f] text-white font-bold rounded-lg'>EE.UU</button>
+        <div className='dropdown'>
+          <button className='dropbtn'>Paises 🔽</button>
+          <div className='dropdown-content'>
+            <button onClick={() => clickToCountry('ve')} type='button' className='m-2 font-bold'>Venezuela</button>
+            <button onClick={() => clickToCountry('us')} type='button' className='m-2 font-bold'>EE.UU</button>
+            <button onClick={() => clickToCountry('us')} type='button' className='m-2 font-bold'>EE.UU</button>
+            <button onClick={() => clickToCountry('us')} type='button' className='m-2 font-bold'>EE.UU</button>
+          </div>
         </div>
       </div>
 
