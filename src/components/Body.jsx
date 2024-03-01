@@ -3,6 +3,9 @@ import { useNews } from '../Hooks/Hook'
 import '../assets/grid.css'
 import '../assets/button.css'
 import '../assets/dropdown.css'
+import { Loading } from './Loading'
+import mock from '../Hooks/mock.json'
+import { Slider } from './Slider'
 
 export function Body() {
   const [topic, updateTopic] = useState('business') // Custom hook to give the topic
@@ -18,16 +21,19 @@ export function Body() {
     console.log(`First run : ${country}`)
   }, [topic, country])
 
+  // Button for topic
   const clickToTopic = (TOPIC) => {
     updateTopic(TOPIC)
     console.log('Click Render Topic')
   }
 
+  // Button for country
   const clickToCountry = (COUNTRY) => {
     updateCountry(COUNTRY)
     console.log('Click Render Country')
   }
 
+  // Render the news
   const newsRender = () => {
     return (
       <ul className='news'>
@@ -49,6 +55,7 @@ export function Body() {
     )
   }
 
+  // Render if we dont have result
   const noResult = () => {
     return (
       <div>
@@ -57,6 +64,7 @@ export function Body() {
     )
   }
 
+  // Render the button that we use to select the topic and the country
   const renderButton = (showText, topic) => {
     return (
       <button onClick={() => clickToTopic(topic)} type='button' className='bg-[#191b1b] mx-1 bn54'>
@@ -65,8 +73,9 @@ export function Body() {
     )
   }
 
+  // Is just a button to fetch a test
   const fetchDePrueba = () => {
-    const URL = 'https://newsapi.org/v2/top-headlines?country=us&language=es&apiKey=f719cf731ef144f49fafc6ccefa4e26e'
+    const URL = 'https://newsapi.org/v2/everything?q=apple&from=2024-02-28&to=2024-02-28&sortBy=popularity&apiKey=f719cf731ef144f49fafc6ccefa4e26e'
     fetch(URL)
       .then(res => res.json())
       .then(json => {
@@ -74,9 +83,21 @@ export function Body() {
       })
   }
 
+  const heroNews = mock?.articles
+  const heroMapped = heroNews.map((news, index) => ({
+    ID: index,
+    title: news.title,
+    description: news.description,
+    URL: news.url,
+    image: news.urlToImage
+  }))
+  const heroWithImage = heroMapped.filter(hero => typeof hero.image === 'string')
+  console.log(heroWithImage)
+
   return (
-    <div className='flex-col'>
-      <button onClick={fetchDePrueba}>Fetch de prueba</button>
+    <main className='flex-col'>
+      <Slider />
+      <button className='p-2 bg-slate-800 rounded-full text-white' onClick={fetchDePrueba}>Fetch de prueba</button>
       <div className='p-2 m-2 -z-50 bg-[#8d99ae] rounded-2xl text-2xl flex items-center justify-between'>
         <div className='flex items-center'>
           {renderButton('Negocios', 'business')}
@@ -100,6 +121,6 @@ export function Body() {
         <h1 className='font-bold m-4 text-white lg:text-2xl'>{`Breaking news in ${country === 've' ? 'Venezuela' : 'EE.UU'} - ${topic}`}</h1>
         {hasNews ? newsRender() : noResult}
       </div>
-    </div>
+    </main>
   )
 }
