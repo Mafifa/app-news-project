@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import arrowLeft from '../assets/ico/arrowLeft.svg'
 import arrowRight from '../assets/ico/arrowRight.svg'
+import arrowUpRigth from '../assets/ico/arrowUpRight.svg'
 import mock from '../Hooks/mock.json'
 
 export function Slider() {
@@ -36,16 +37,16 @@ export function Slider() {
           {heroWithImage.slice(startIndex, startIndex + itemsPerPage).map(item => (
             <li key={item.ID}>
               <div className='flex'>
-                <div className='lg:max-w-[512PX] flex flex-col p-2 rounded-3xl bg-[#dad2cc] text-wrap'>
+                <div className='lg:max-w-2xl lg:min-w-xl flex flex-col p-2 rounded-3xl bg-[#efe8e2] text-wrap'>
                   <h2 className='text-5xl m-4'>
                     {item.title}
                   </h2>
-                  <p className='p-2 m-5 mb-12 text-xl'>
+                  <p className='p-2 m-5 mb-12 text-xl text-wrap'>
                     {item.description}
                   </p>
-                  <a className='flex items-center justify-center ml-auto m-2 py-2 px-6 text-white bg-orange-600 rounded-full' target='_blank' rel='nooperner noreferrer' href={item.URL}> Leer mas ↗</a>
+                  <a className='flex items-center justify-center ml-auto m-2 pl-6 text-white bg-orange-600 rounded-full' target='_blank' rel='nooperner noreferrer' href={item.URL}> LEER MAS <img className='size-10 ml-7' src={arrowUpRigth} alt='arrow up right' /></a>
                 </div>
-                <div className='bg-[#9c9a98] rounded-3xl flex justify-center items-center'>
+                <div className='bg-[#9c9a98] lg:max-w-lg lg:min-w-lg rounded-3xl flex justify-center items-center'>
                   <img className='size-max' src={item.image} alt='image about the hero topic' />
                 </div>
               </div>
