@@ -36,14 +36,14 @@ export function Body() {
   // Render the news
   const newsRender = () => {
     return (
-      <ul className='news'>
+      <ul className='max-w-64'>
         {
           newsMapped.map(news => (
             <li className='new p-2 m-2 bg-[#8d99ae] rounded-xl' key={news.ID}>
               <div>
                 <a target='_blank' rel='nooperner noreferrer' href={news.url}>
                   <div>
-                    <h3 className='text-3xl font-bold text-wrap'>{news.title}</h3>
+                    <h3 className='font-bold text-wrap'>{news.title}</h3>
                     <p className='text-black font-bold italic'>{news.date}</p>
                   </div>
                 </a>
@@ -83,21 +83,8 @@ export function Body() {
       })
   }
 
-  const heroNews = mock?.articles
-  const heroMapped = heroNews.map((news, index) => ({
-    ID: index,
-    title: news.title,
-    description: news.description,
-    URL: news.url,
-    image: news.urlToImage
-  }))
-  const heroWithImage = heroMapped.filter(hero => typeof hero.image === 'string')
-  console.log(heroWithImage)
-
-  return (
-    <main className='flex-col'>
-      <Slider />
-      <button className='p-2 bg-slate-800 rounded-full text-white' onClick={fetchDePrueba}>Fetch de prueba</button>
+  const renderButtons = () => {
+    return (
       <div className='p-2 m-2 -z-50 bg-[#8d99ae] rounded-2xl text-2xl flex items-center justify-between'>
         <div className='flex items-center'>
           {renderButton('Negocios', 'business')}
@@ -116,10 +103,28 @@ export function Body() {
           </div>
         </div>
       </div>
+    )
+  }
 
+  const heroNews = mock?.articles
+  const heroMapped = heroNews.map((news, index) => ({
+    ID: index,
+    title: news.title,
+    description: news.description,
+    URL: news.url,
+    image: news.urlToImage
+  }))
+  const heroWithImage = heroMapped.filter(hero => typeof hero.image === 'string')
+  console.log(heroWithImage)
+
+  return (
+    <main className='flex-col'>
+      <Slider />
+      {/* <button className='p-2 bg-slate-800 rounded-full text-white' onClick={fetchDePrueba}>Fetch de prueba</button> */}
+      {renderButtons()}
       <div className='p-2 bg-[#2B2D42] rounded-xl flex-col items-center justify-around'>
         <h1 className='font-bold m-4 text-white lg:text-2xl'>{`Breaking news in ${country === 've' ? 'Venezuela' : 'EE.UU'} - ${topic}`}</h1>
-        {hasNews ? newsRender() : noResult}
+        <aside>{hasNews ? newsRender() : noResult()}</aside>
       </div>
     </main>
   )
