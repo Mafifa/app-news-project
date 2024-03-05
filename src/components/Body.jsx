@@ -57,10 +57,39 @@ export function Body() {
 
   // Render if we dont have result
   const noResult = () => {
+    const pruebas = [{
+      title: 'The Morning After: Apples car project may be dead',
+      URL: 'https://www.google.com',
+      ID: 1,
+      DATE: '12/12/12'
+    },
+    {
+      title: 'Esto es solo una prueba para visulizar la informacion',
+      URL: 'https://www.google.com',
+      ID: 1,
+      DATE: '12/12/12'
+    },
+    {
+      title: 'Esto es solo una prueba para visulizar la informacion',
+      URL: 'https://www.google.com',
+      ID: 1,
+      DATE: '12/12/12'
+    }]
+
     return (
-      <div>
-        <h2>No se encontraron resultados</h2>
-      </div>
+      <aside className='w-64 mt-2 bg-white shadow-md rounded-lg overflow-hidden'>
+        <h3 className='text-2xl font-bold text-gray-900 p-5 border-b'>Latest News</h3>
+        <ul>
+          {pruebas.map((news, index) => (
+            <li key={index} className='p-4 hover:bg-gray-50'>
+              <div>
+                <p className='text-gray-900 font-semibold'>{news.title}</p>
+                <p className='text-sm text-gray-600'>{news.DATE}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </aside>
     )
   }
 
@@ -85,7 +114,7 @@ export function Body() {
 
   const renderButtons = () => {
     return (
-      <div className='p-2 m-2 -z-50 bg-[#8d99ae] rounded-2xl text-2xl flex items-center justify-between'>
+      <div className='p-2 bg-[#efe8e2] border-b-2 border-solid border-[#000] text-2xl flex items-center justify-between'>
         <div className='flex items-center'>
           {renderButton('Negocios', 'business')}
           {renderButton('Deporte', 'sports')}
@@ -121,10 +150,12 @@ export function Body() {
     <main className='flex-col'>
       <Slider />
       {/* <button className='p-2 bg-slate-800 rounded-full text-white' onClick={fetchDePrueba}>Fetch de prueba</button> */}
-      {renderButtons()}
-      <div className='p-2 bg-[#2B2D42] rounded-xl flex-col items-center justify-around'>
-        <h1 className='font-bold m-4 text-white lg:text-2xl'>{`Breaking news in ${country === 've' ? 'Venezuela' : 'EE.UU'} - ${topic}`}</h1>
-        <aside>{hasNews ? newsRender() : noResult()}</aside>
+      <div className='mt-6 bg-[#efe8e2] rounded-xl justify-between'>
+        {renderButtons()}
+        <section className='flex justify-between'>
+          <h1 className='font-bold m-4 lg:text-2xl'>{`Breaking news in ${country === 've' ? 'Venezuela' : 'EE.UU'} - ${topic}`}</h1>
+          <div className='m-2'>{hasNews ? newsRender() : noResult()}</div>
+        </section>
       </div>
     </main>
   )
