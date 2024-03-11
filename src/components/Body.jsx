@@ -4,7 +4,6 @@ import '../assets/grid.css'
 import '../assets/button.css'
 import '../assets/dropdown.css'
 import { Loading } from './Loading'
-import mock from '../Hooks/mock.json'
 import { Slider } from './Slider'
 
 export function Body() {
@@ -35,23 +34,22 @@ export function Body() {
 
   // Render the news
   const newsRender = () => {
+    // Solo quermeos las cuatros primeras
+    const fourNewsMapped = newsMapped.slice(0, 4)
     return (
-      <ul className='max-w-64'>
-        {
-          newsMapped.map(news => (
-            <li className='new p-2 m-2 bg-[#8d99ae] rounded-xl' key={news.ID}>
-              <div>
-                <a target='_blank' rel='nooperner noreferrer' href={news.url}>
-                  <div>
-                    <h3 className='font-bold text-wrap'>{news.title}</h3>
-                    <p className='text-black font-bold italic'>{news.date}</p>
-                  </div>
-                </a>
-              </div>
+      <aside className='w-64 mt-2 bg-white shadow-md rounded-lg overflow-hidden'>
+        <h4 className='text-2xl font-bold text-gray-900 p-5 border-b'>Latest News</h4>
+        <ul>
+          {fourNewsMapped.map((news, index) => (
+            <li key={index} className='p-4 hover:bg-gray-50'>
+              <a href={news.url}>
+                <p className='text-black font-semibold'>{news.title}</p>
+                <p className='text-sm text-gray-600'>{news.date}</p>
+              </a>
             </li>
-          ))
-        }
-      </ul>
+          ))}
+        </ul>
+      </aside>
     )
   }
 
@@ -78,7 +76,7 @@ export function Body() {
 
     return (
       <aside className='w-64 mt-2 bg-white shadow-md rounded-lg overflow-hidden'>
-        <h3 className='text-2xl font-bold text-gray-900 p-5 border-b'>Latest News</h3>
+        <h4 className='text-2xl font-bold text-gray-900 p-5 border-b'>Latest News</h4>
         <ul>
           {pruebas.map((news, index) => (
             <li key={index} className='p-4 hover:bg-gray-50'>
@@ -135,25 +133,21 @@ export function Body() {
     )
   }
 
-  const heroNews = mock?.articles
-  const heroMapped = heroNews.map((news, index) => ({
-    ID: index,
-    title: news.title,
-    description: news.description,
-    URL: news.url,
-    image: news.urlToImage
-  }))
-  const heroWithImage = heroMapped.filter(hero => typeof hero.image === 'string')
-  console.log(heroWithImage)
-
   return (
+
     <main className='flex-col'>
       <Slider />
       {/* <button className='p-2 bg-slate-800 rounded-full text-white' onClick={fetchDePrueba}>Fetch de prueba</button> */}
       <div className='mt-6 bg-[#efe8e2] rounded-xl justify-between'>
         {renderButtons()}
         <section className='flex justify-between'>
-          <h1 className='font-bold m-4 lg:text-2xl'>{`Breaking news in ${country === 've' ? 'Venezuela' : 'EE.UU'} - ${topic}`}</h1>
+          <div>
+            <h2 className='font-bold m-4 lg:text-2xl'>{`Breaking news in ${country === 've' ? 'Venezuela' : 'EE.UU'} - ${topic}`}</h2>
+            <div className='flex'>
+              <img className='max-w-[682px] m-2' src='public/Model-Guidejpg.jpg' alt='princiap new' />
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatem rem ut excepturi, corrupti hic obcaecati quis provident aliquam iste ex, velit sed ipsa assumenda neque minus modi consequuntur vero necessitatibus!</p>
+            </div>
+          </div>
           <div className='m-2'>{hasNews ? newsRender() : noResult()}</div>
         </section>
       </div>
