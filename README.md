@@ -1,4 +1,13 @@
+
 # Plataforma de Noticias
+
+------------
+
+## ESTE PROYECTO FUE ABANDONADO
+
+Debido a no encontrar una api de noticias gratuitas, el proyecto fue abandonado. Muchas gracias si te intereso. Puedes ver mas en mi [repositorio](https://github.com/Mafifa?tab=repositories)
+
+-----------
 
 Plataforma donde los usuarios puedan ver las últimas noticias de diferentes fuentes y categorías. Se integra una API de noticias para obtener los datos y mostrarlos en la aplicación. Implemente funciones con (la posibilidad de guardar noticias favoritas[<strong>Esta es opcional</strong>]), buscar por palabra clave y filtrar por categoría.
 
